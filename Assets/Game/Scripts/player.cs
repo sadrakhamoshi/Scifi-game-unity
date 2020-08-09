@@ -23,42 +23,63 @@ public class player : MonoBehaviour
     [SerializeField]
     private AudioSource _weaponAudio;
 
+    private int currentAmmo;
+    private int maxAmmo = 50;
+
+    private bool _isReloading;
+
     void Start()
     {
         _controller = GetComponent<CharacterController>();
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        currentAmmo = maxAmmo;
     }
 
     void Update()
     {
         HideCursor();
         Movement();
-        if (Input.GetMouseButton(0))
+
+        if (Input.GetKeyDown(KeyCode.R)&&!_isReloading)
         {
-            _muzzelFlash.SetActive(true);
+            _isReloading = true;
+            StartCoroutine(Reload());
+        }
 
-            if (!_weaponAudio.isPlaying)
-                _weaponAudio.Play();
-            //screen point ->(0,screen.width)
-            //Ray originRay = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
-
-            //view point -> (0,1)
-            Ray originRay = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-
-            RaycastHit hit;
-
-            if (Physics.Raycast(originRay,out hit, Mathf.Infinity))
-            {
-                print(hit.transform.name);
-                var tmp = Instantiate(_hitMaker, hit.point, Quaternion.LookRotation(hit.normal));
-                Destroy(tmp, 0.8f);
-            }
+        if (Input.GetMouseButton(0) && currentAmmo > 0)
+        {
+            Shoot();
         }
         else
         {
             _weaponAudio.Stop();
             _muzzelFlash.SetActive(false);
+        }
+    }
+
+    private void Shoot()
+    {
+        _muzzelFlash.SetActive(true);
+
+        if (!_weaponAudio.isPlaying)
+            _weaponAudio.Play();
+
+        currentAmmo--;
+
+        //screen point ->(0,screen.width)
+        //Ray originRay = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+
+        //view point -> (0,1)
+        Ray originRay = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(originRay, out hit, Mathf.Infinity))
+        {
+            print(hit.transform.name);
+            var tmp = Instantiate(_hitMaker, hit.point, Quaternion.LookRotation(hit.normal));
+            Destroy(tmp, 0.8f);
         }
     }
 
@@ -81,5 +102,11 @@ public class player : MonoBehaviour
         //convert local to global
         velocity = transform.transform.TransformDirection(velocity);
         _controller.Move(velocity * Time.deltaTime);
+    }
+    IEnumerator Reload()
+    {
+        yield return new WaitForSeconds(1.5f);
+        currentAmmo = maxAmmo;
+        _isReloading = false;
     }
 }
