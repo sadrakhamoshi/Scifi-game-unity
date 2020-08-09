@@ -24,12 +24,30 @@ public class player : MonoBehaviour
 
     void Update()
     {
+        HideCursor();
+        Movement();
+        if (Input.GetMouseButtonDown(0))
+        {
+            //screen point ->(0,screen.width)
+            //Ray originRay = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+
+            //view point -> (0,1)
+            Ray originRay = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+            RaycastHit hit;
+            if (Physics.Raycast(originRay,out hit, Mathf.Infinity))
+            {
+                print(hit.transform.name);
+            }
+        }
+    }
+
+    private static void HideCursor()
+    {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
         }
-        Movement();
     }
 
     private void Movement()
