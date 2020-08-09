@@ -9,7 +9,7 @@ public class player : MonoBehaviour
     private CharacterController _controller;
 
     [SerializeField]
-    private float _speed=4f;
+    private float _speed = 4f;
 
     [SerializeField]
     private float gravity = 9.8f;
@@ -18,10 +18,17 @@ public class player : MonoBehaviour
     void Start()
     {
         _controller = GetComponent<CharacterController>();
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
         Movement();
     }
 
@@ -34,6 +41,6 @@ public class player : MonoBehaviour
 
         //convert local to global
         velocity = transform.transform.TransformDirection(velocity);
-        _controller.Move(velocity * Time.deltaTime );
+        _controller.Move(velocity * Time.deltaTime);
     }
 }
