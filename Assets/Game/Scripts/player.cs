@@ -14,6 +14,8 @@ public class player : MonoBehaviour
     [SerializeField]
     private float gravity = 9.8f;
 
+    [SerializeField]
+    private GameObject _muzzelFlash;
 
     void Start()
     {
@@ -26,18 +28,26 @@ public class player : MonoBehaviour
     {
         HideCursor();
         Movement();
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
+            _muzzelFlash.SetActive(true);
+
             //screen point ->(0,screen.width)
             //Ray originRay = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
 
             //view point -> (0,1)
             Ray originRay = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+
             RaycastHit hit;
+
             if (Physics.Raycast(originRay,out hit, Mathf.Infinity))
             {
                 print(hit.transform.name);
             }
+        }
+        else
+        {
+            _muzzelFlash.SetActive(false);
         }
     }
 
