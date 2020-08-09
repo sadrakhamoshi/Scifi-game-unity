@@ -28,6 +28,8 @@ public class player : MonoBehaviour
 
     private bool _isReloading;
 
+    public int coinCount = 0;
+
     private UiManager _uiManager;
 
     void Start()
