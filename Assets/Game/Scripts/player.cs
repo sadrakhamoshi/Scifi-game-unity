@@ -20,6 +20,9 @@ public class player : MonoBehaviour
     [SerializeField]
     private GameObject _hitMaker;
 
+    [SerializeField]
+    private AudioSource _weaponAudio;
+
     void Start()
     {
         _controller = GetComponent<CharacterController>();
@@ -35,6 +38,8 @@ public class player : MonoBehaviour
         {
             _muzzelFlash.SetActive(true);
 
+            if (!_weaponAudio.isPlaying)
+                _weaponAudio.Play();
             //screen point ->(0,screen.width)
             //Ray originRay = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
 
@@ -52,6 +57,7 @@ public class player : MonoBehaviour
         }
         else
         {
+            _weaponAudio.Stop();
             _muzzelFlash.SetActive(false);
         }
     }
