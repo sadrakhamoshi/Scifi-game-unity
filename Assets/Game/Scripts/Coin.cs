@@ -17,6 +17,11 @@ public class Coin : MonoBehaviour
                 if (player != null)
                 {
                     player.coinCount++;
+                    UiManager ui = GameObject.Find("Canvas").GetComponent<UiManager>();
+                    if (ui != null)
+                    {
+                        ui.showCoin(player.coinCount);
+                    }
                     AudioSource.PlayClipAtPoint(_coinPick, Camera.main.transform.position, 1f);
                     Destroy(this.gameObject);
                 }
