@@ -28,12 +28,16 @@ public class player : MonoBehaviour
 
     private bool _isReloading;
 
+    private UiManager _uiManager;
+
     void Start()
     {
         _controller = GetComponent<CharacterController>();
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         currentAmmo = maxAmmo;
+        _uiManager = GameObject.Find("Canvas").GetComponent<UiManager>();
+        _uiManager.UpdatAmmor(50);
     }
 
     void Update()
@@ -66,6 +70,7 @@ public class player : MonoBehaviour
             _weaponAudio.Play();
 
         currentAmmo--;
+        _uiManager.UpdatAmmor(currentAmmo);
 
         //screen point ->(0,screen.width)
         //Ray originRay = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
@@ -107,6 +112,7 @@ public class player : MonoBehaviour
     {
         yield return new WaitForSeconds(1.5f);
         currentAmmo = maxAmmo;
+        _uiManager.UpdatAmmor(currentAmmo);
         _isReloading = false;
     }
 }
