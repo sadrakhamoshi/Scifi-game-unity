@@ -27,7 +27,12 @@ public class player : MonoBehaviour
     private void Movement()
     {
         Vector3 diraction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        diraction.y -= gravity;
-        _controller.Move(diraction * Time.deltaTime * _speed);
+        Vector3 velocity = diraction * _speed;
+
+        velocity.y -= gravity;
+
+        //convert local to global
+        velocity = transform.transform.TransformDirection(velocity);
+        _controller.Move(velocity * Time.deltaTime );
     }
 }
