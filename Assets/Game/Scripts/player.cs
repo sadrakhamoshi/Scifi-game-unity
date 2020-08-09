@@ -90,6 +90,12 @@ public class player : MonoBehaviour
             print(hit.transform.name);
             var tmp = Instantiate(_hitMaker, hit.point, Quaternion.LookRotation(hit.normal));
             Destroy(tmp, 0.8f);
+
+            Destructible destructible = hit.transform.GetComponent<Destructible>();
+            if (destructible != null)
+            {
+                destructible.DestroyCrete();    
+            }
         }
     }
 
