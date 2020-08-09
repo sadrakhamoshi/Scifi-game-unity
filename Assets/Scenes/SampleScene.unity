@@ -303,19 +303,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.4, y: 2.7, z: 2.6}
   m_Center: {x: 0.03, y: 0.88, z: 0.8}
---- !u!114 &397435167
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 397435165}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f591e9790526284cb1faed1349d29e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _weaponBuy: {fileID: 8300000, guid: 4bb10aeb4f80079438e51f131753f5d5, type: 3}
 --- !u!54 &397435168
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -332,6 +319,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &397435171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 397435165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f591e9790526284cb1faed1349d29e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weaponBuy: {fileID: 8300000, guid: 4bb10aeb4f80079438e51f131753f5d5, type: 3}
 --- !u!1 &547377651
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,6 +493,7 @@ MonoBehaviour:
   _muzzelFlash: {fileID: 713361559}
   _hitMaker: {fileID: 1278410308571632, guid: 0dca392d0ad60af418c1bace1abde0c6, type: 3}
   _weaponAudio: {fileID: 1666530029}
+  _weapon: {fileID: 1131049163}
   coinCount: 0
 --- !u!23 &855163763
 MeshRenderer:
@@ -841,6 +842,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1013355575}
   m_CullTransparentMesh: 0
+--- !u!1 &1131049163 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1303171181363726, guid: 88bae2de7f0014e4fa5e93fd72610be7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1697873379}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1212523520
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1152,7 +1159,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1303171181363726, guid: 88bae2de7f0014e4fa5e93fd72610be7, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4717414709492158, guid: 88bae2de7f0014e4fa5e93fd72610be7, type: 3}
       propertyPath: m_LocalPosition.x

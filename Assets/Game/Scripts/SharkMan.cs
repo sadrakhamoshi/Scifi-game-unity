@@ -20,6 +20,7 @@ public class SharkMan : MonoBehaviour
                     {
                         player.coinCount--;
                         AudioSource.PlayClipAtPoint(_weaponBuy, Camera.main.transform.position, 1f);
+                        player.EnabaleWeapon();
                         UiManager ui = GameObject.Find("Canvas").GetComponent<UiManager>();
                         if (ui != null)
                         {
