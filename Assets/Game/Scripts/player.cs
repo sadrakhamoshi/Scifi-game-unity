@@ -17,6 +17,9 @@ public class player : MonoBehaviour
     [SerializeField]
     private GameObject _muzzelFlash;
 
+    [SerializeField]
+    private GameObject _hitMaker;
+
     void Start()
     {
         _controller = GetComponent<CharacterController>();
@@ -43,6 +46,8 @@ public class player : MonoBehaviour
             if (Physics.Raycast(originRay,out hit, Mathf.Infinity))
             {
                 print(hit.transform.name);
+                var tmp = Instantiate(_hitMaker, hit.point, Quaternion.LookRotation(hit.normal));
+                Destroy(tmp, 0.8f);
             }
         }
         else
